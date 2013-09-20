@@ -1,1 +1,1 @@
-require "i18n-markdown"
+require "middleman-i18n-markdown"
