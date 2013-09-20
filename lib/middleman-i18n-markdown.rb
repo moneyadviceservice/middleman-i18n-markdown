@@ -2,12 +2,33 @@
 require "middleman-core"
 
 # Extension namespace
-class MyExtension < ::Middleman::Extension
+class I18nMarkdown < ::Middleman::Extension
   option :my_option, "default", "An example option"
 
   def initialize(app, options_hash={}, &block)
     # Call super to build options from the options_hash
     super
+
+    module I18n::Backend
+     module Markdown
+       def markdown
+         options = { link_attributes: { target: "_blank" } }
+         @markdown ||= Redcarpet::Markdown.new(Redcarpet::Render::HTML.new(options))
+       end
+
+       def translate(locale, key, options = {})
+         puts super.inspect
+         options[:markdown] ? process(super) : super
+         process(super)
+       end
+
+       def process(entry)
+         markdown.render(entry)
+       end
+     end
+    end
+
+    I18n::Backend::Simple.send(:include, I18n::Backend::Markdown)
 
     # Require libraries only when activated
     # require 'necessary/library'
