@@ -13,6 +13,7 @@ class I18nMarkdown < ::Middleman::Extension
      end
 
      def translate(locale, key, options = {})
+       puts super.inspect
        options[:markdown] ? process(super) : super
      end
 

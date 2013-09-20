@@ -9,6 +9,7 @@ Gem::Specification.new do |s|
   s.homepage    = "http://moneyadviceservice.org.uk"
   s.summary     = %q{Add markdown processing to I18n translation files}
   s.description = %q{Process I18n keys with the option :markdown => true through redcarpet}
+  s.license	= "MIT"
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
