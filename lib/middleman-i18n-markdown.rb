@@ -1,5 +1,6 @@
 # Require core library
 require "middleman-core"
+require "redcarpet"
 
 # Extension namespace
 class I18nMarkdown < ::Middleman::Extension
@@ -13,7 +14,6 @@ class I18nMarkdown < ::Middleman::Extension
      end
 
      def translate(locale, key, options = {})
-       puts super.inspect
        options[:markdown] ? process(super) : super
      end
 
@@ -27,22 +27,10 @@ class I18nMarkdown < ::Middleman::Extension
     # Call super to build options from the options_hash
     super
 
-
     I18n::Backend::Simple.send(:include, I18n::Backend::Markdown)
-
-    # Require libraries only when activated
-    # require 'necessary/library'
-
-    # set up your extension
-    # puts options.my_option
   end
 
   def after_configuration; end
 end
 
-# Register extensions which can be activated
-# Make sure we have the version of Middleman we expect
-# Name param may be omited, it will default to underscored
-# version of class name
-
- I18nMarkdown.register(:i18n_markdown)
+I18nMarkdown.register(:i18n_markdown)
